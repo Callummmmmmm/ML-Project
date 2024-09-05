@@ -13,7 +13,7 @@ clean_df = data()
 
 
 def HGBR_shap(input_data, var, top_n):
-    top_n = top_n - 1
+    top_n = top_n
     # Seperating the dataframes based on missing O3 values and assinging to variables.
     df_missing = input_data[input_data[var].isnull()]
     df_not_missing = input_data.dropna(subset = [var])
@@ -152,5 +152,34 @@ def time_series(input_data, var, top_n):
         plt.xlabel('Index')
         plt.ylabel(variable)
         plt.grid(True)
+        plt.show()
+
+
+# In[ ]:
+
+
+def time_series1(input_data, var, top_n):
+    imp_var_df = HGBR_shap(input_data, var, top_n)
+    exc_var_df = imp_var_df.drop(columns = [var])
+    for variable in exc_var_df:
+        fig, ax1 = plt.subplots()
+
+        var1 = clean_df[var]
+        var2 = clean_df[variable]
+        
+        ax1.plot(var1.values, 'r-', linewidth=0.05)
+        ax1.plot(var2.values, 'b-', linewidth=0.05)
+
+        e = max(var1.max(), var2.max())
+
+        ax1.set_ylim(-1.1 * e, 1.1 * e)
+
+        v2v1 = var2/var1
+
+        ax2 = ax1.twinx()
+        ax2.plot(v2v1.values, color = 'black', linewidth=0.05)
+        ax2.set_ylim(v2v1.min(), 2.1 * v2v1.max())
+        
+        plt.title(f'Relationship Between {var} and {variable}')
         plt.show()
 
