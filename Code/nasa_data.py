@@ -28,5 +28,5 @@ for file in files:
                                                  'TS':ds[variable].sel(lat=16.53, lon=-23.0, method='nearest').values})],
                                                  ignore_index=True)
 
-df.to_csv(f'/mnt/ML-Project/Input/{variable}.csv')
+df.to_csv(f'/users/dhd512/ML-Project/Input/{variable}.csv')
 
