@@ -10,7 +10,7 @@ from data_imports import pd
 # In[2]:
 
 
-def data():
+def CVAO_data():
     filepath = '/Users/callumwilson/Documents/GitHub/ML-Project/Input/20240423_CV_merge.csv'
 
     # Reading csv and assigning to a variable.
@@ -21,17 +21,6 @@ def data():
     df_clean.index = pd.to_datetime(df_clean.index)
 
     return df_clean
-
-def time_based(input_data):
-    df = input_data
-    
-    # Creating new variables based on date time.
-    df['hour'] = df.index.hour
-    df['day_of_week'] = df.index.dayofweek
-    df['month'] = df.index.month
-    df['time_since_start'] = (df.index - df.index.min()).days
-    
-    return df
 
 def GEOS_FP_A1_data():
     filepath = '/Users/callumwilson/Documents/GitHub/ML-Project/Input/all_variables.csv'
